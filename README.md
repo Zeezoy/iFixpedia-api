@@ -45,5 +45,5 @@ Finding a trustworthy technician to repair a phone or laptop is often hard: pric
    - M3 Productio-ready: layered architecture, tests, Docker, CI/CD, deployment, caching, and a job queue.
      
    ## Notes
-  Built solo as hands-on project to learn backend development with Node.js, Express, and TypeScript. 
+     Built solo as hands-on project to learn backend development with Node.js, Express, and TypeScript. 
    
