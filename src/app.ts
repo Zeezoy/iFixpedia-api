@@ -1,11 +1,22 @@
-import express, { type Request, type Response } from "express";
+import express from "express";
+import type {Request, Response} from "express";
+import guideRouter from "./routes/guide.routes.js";
 
 const app = express();
 
 app.use(express.json());
 
 app.get("/health", (req: Request, res: Response) => {
-    res.status(200).json({ status: "oke" });
+    res.status(200).json({ status:"ok" });
 });
 
-export default app;
+app.use("/api/guides", guideRouter)
+
+export default app
+
+
+
+
+
+
+
