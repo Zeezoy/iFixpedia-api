@@ -11,3 +11,9 @@ export const findById = async (id:number) => {
 
     return result.rows[0]; 
 };
+
+export const create = async(title: string, category:string) => {
+    const result = await pool.query("INSERT INTO guides (title, category) VALUES ($1, $2)  RETURNING *", [title, category], );
+
+    return result.rows[0];
+}

@@ -27,3 +27,16 @@ export const getGuideById = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Terjadi kesalahan pada server"});
     }
 };
+
+export const createGuide = async (req: Request, res: Response) => {
+    try{
+        const { title, category } = req.body;
+        
+        const guide = await guideService.createguide(title, category);
+        
+        res.status(201).json(guide);    
+    } catch (error){
+        console.error(error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server"});
+    }
+};
