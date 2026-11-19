@@ -30,7 +30,17 @@ export const getGuideById = async (req: Request, res: Response) => {
 
 export const createGuide = async (req: Request, res: Response) => {
     try{
-        const { title, category } = req.body;
+        const { title, category } = req.body ?? {};
+
+        if (typeof title !== "string" || title.trim() === "" || title.length > 150) {
+            res.status(400).json({message: "title wajib berupa teks 1-150 karakter"});
+            return; 
+        }
+
+        if (typeof category !== "string" || category.trim() === "" || category.length > 50){
+            res.status(400).json({message: "category wajib berupa teks 1-50 karakter"});
+            return;
+        }
         
         const guide = await guideService.createguide(title, category);
         
