@@ -1,21 +1,26 @@
-import type {Request, Response } from "express";
+// guide.controller.ts  (bagian HTTP)
+//   1. Impor tipe Request dan Response, dan impor service
+//   2. getAllGuides: minta daftar ke service, balas 200
+//   3. getGuideById:
+//        a. ambil id dari req.params, ubah jadi angka
+//        b. minta ke service
+//        c. kalau tidak ada: balas 404 + STOP
+//        d. kalau ada: balas 200
 
-const guides = [
-    {id: 1, title: "Cara mengosongkan cache HP", category: "HP" },
-    {id: 2, title:"Mengatur tinta printer", category: "Printer"},
-    {id: 3, title: "Laptop tidak merespons", category: "Laptop"}
-];
+import type {Request, Response} from "express";
+import * as guideService from "../services/guide.service.js";
 
 export const getAllGuides = (req: Request, res: Response) => {
-    res.status(200).json(guides)
+    const guides = guideService.getAllGuides();
+    res.status(200).json(guides);
 };
 
 export const getGuideById = (req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const guide = guides.find((item) => item.id === id);
-    if (!guide){
+    const guide = guideService.getGuideById(id);
+
+    if(!guide){
         res.status(404).json({ message: "Petunjuk tidak ditemukan" });
-        return;
     }
 
     res.status(200).json(guide);
